@@ -130,3 +130,101 @@ min_miss_pos([0, -4, -4, -1, -9, -4, -5, -2, -10, -7, -6, -3, -10, -9])
 min_miss_pos([7, 6, 5, 4, 3, 2, 1])
 
 # %%
+# Count the Lone Ones
+# Create a function which counts how many lone 1s appear in a given number. 
+# Lone means the number doesn't appear twice or more in a row.
+
+import re
+
+def count_lone_ones(n):
+    return len([a for a in re.split('[^1]+', str(n)) if a == '1'])
+
+
+count_lone_ones(101)
+count_lone_ones(1191)
+count_lone_ones(462)
+
+# %%
+# Find the Difference
+# You are given two strings s and t. String t is generated 
+# by randomly shuffling string s and then adding one more 
+# letter at a random position. Return the letter that was 
+# added to t.
+
+from itertools import zip_longest
+
+def find_the_difference(t1, t2):
+    return [b for a, b in zip_longest(sorted(t1), sorted(t2)) if a != b][0]
+
+find_the_difference("abcd", "abcde")
+find_the_difference("", "y")
+find_the_difference("ae", "aea")
+
+# %%
+# Sharing is Caring
+# Given a list of numbers, create a function that removes 
+# 25% from every number in the list except the smallest 
+# number, and adds the total amount removed to the 
+# smallest number.
+
+def show_the_love(l):
+    n = sum([a/4 for a in l if a != min(l)])
+    l = [a + n if a == min(l) else a - a/4 for a in l]
+    return l
+
+show_the_love([4, 1, 4])
+
+# %%
+# Vowel to Vowel Links
+
+# Given a sentence as txt, return True if any two adjacent 
+# words have this property: One word ends with a vowel, 
+# while the word immediately after begins with a 
+# vowel (a e i o u).
+
+def vowel_links(txt):
+    txt = txt.split()
+    return any([1 if txt[i+1][0] in 'aeiou' and txt[i][-1] in 'aeiou' else 0 for i in range(len(txt)-1)])
+
+vowel_links("a very large appliance")
+vowel_links("the sudden applause")
+
+# %%
+# Check That Input Type Is the Same
+
+# Create a function that checks if the given arguments are of the same type. 
+# Return True if they are and False if they're not.
+
+def compare_data(*args):
+    return len(set([type(a) for a in args])) in [1, 0]
+
+compare_data(1, 6, 5, 3, 7, 9)
+compare_data()
+
+#%%
+# Sum of Negative Integers
+
+# Create a function that takes a string containing integers 
+# as well as other characters and return the sum of 
+# the negative integers only.
+import re
+
+def negative_sum(txt):
+    return sum([int(a) for a in re.split('(-\d+)', txt) if a.startswith('-')])
+
+negative_sum("-12 13%14&-11")
+negative_sum("22 13%14&-11-22 13 12")
+
+# %%
+# Array Chunking
+
+# Given an array and chunk size "n", Create a function 
+# such that it divides the array into many subarrays where 
+# each subarray is of length size "n".
+
+def chunk(l, n):
+    return [l[i-n:i] for i in range(n, len(l) + n, n)]
+
+chunk([1, 2, 3, 4], 2)
+chunk([1, 2, 3, 4, 5, 6, 7], 3)
+chunk([1, 2, 3, 4, 5], 10)
