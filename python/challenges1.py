@@ -228,3 +228,12 @@ def chunk(l, n):
 chunk([1, 2, 3, 4], 2)
 chunk([1, 2, 3, 4, 5, 6, 7], 3)
 chunk([1, 2, 3, 4, 5], 10)
+
+# %%
+# Length of Number
+
+def number_length(n):
+    return sum(1 for a in str(n))
+
+number_length(10)
+# %%
