@@ -237,3 +237,42 @@ def number_length(n):
 
 number_length(10)
 # %%
+# Broken Keyboard
+
+from collections import OrderedDict
+
+def find_broken_keys(t1, t2):
+    o = OrderedDict(zip(t1, t2))
+    return [a for a, b in o.items() if a != b]
+
+find_broken_keys("starry night", "starrq light")
+find_broken_keys("mozart", "aiwgvx")
+find_broken_keys("happy birthday", "hawwy birthday")
+
+# %%
+# Recursion: Halve and Halve Again
+
+def halve_count(a, b):
+    if a > b:
+        return halve_count(a/2, b) + 1
+    return -1
+
+halve_count(1324, 98)
+
+# %%
+# Ones and Zeroes
+# Write a function that returns True if every consecutive 
+# sequence of ones is followed by a consecutive sequence of 
+# zeroes of the same length.
+import re 
+
+def same_length(txt):
+    return all(len(a) == len(b) for a, b in 
+        zip(re.findall('1+', txt), re.findall('0+', txt))) and len(txt) % 2 == 0
+    
+
+same_length("110011100010")
+same_length('1001')
+same_length('101')
+
+# %%
