@@ -276,3 +276,13 @@ same_length('1001')
 same_length('101')
 
 # %%
+# Luke, I Am Your ...
+
+def relation_to_luke(name):
+    d = {'Darth Vader': 'father', 'Leia': 'sister',
+        'Han': 'brother in law', 'R2D2': 'droid'}
+    return "Luke, I am your {}.".format(d.get(name))
+
+relation_to_luke("Darth Vader")
+
+# %%

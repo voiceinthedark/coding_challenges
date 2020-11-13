@@ -5,3 +5,4 @@ Jupytre book style notes where I solve programming and coding problems from many
 Currently solving from:
 * [edabit](http://www.edabit.com)
 * [hackerrank](https://www.hackerrank.com/)
+* [codewars](https://www.codewars.com/)
