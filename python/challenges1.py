@@ -383,3 +383,27 @@ for test in testsC:
     print(nCr(*test[0]) == test[1])
 
 print('t = {:.9f} sec'.format(time.perf_counter() - tic))
+
+# %%
+# Pizza Points™
+# https://edabit.com/challenge/Emdzxs23PRzSDuvk3
+
+from itertools import groupby
+
+def pizza_points(customers, min_orders, min_price):
+    try:
+        m = [[k, len(list(g))] for k, g in groupby([i for i, j in customers.items()
+                                                    for x in j if x >= min_price])]
+        return sorted([x[0] for x in m if x[1] >= min_orders])
+    except:
+        return []
+    
+
+
+customers = {
+    "Batman": [22, 30, 11, 17, 15, 52, 27, 12],
+    "Spider-Man": [5, 17, 30, 33, 40, 22, 26, 10, 11, 45]
+}
+
+pizza_points(customers, 5, 20)
+# pizza_points(customers, 5, 100)

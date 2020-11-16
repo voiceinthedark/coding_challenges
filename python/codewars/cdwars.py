@@ -139,3 +139,51 @@ def find_even_index(l):
 find_even_index([1, 2, 3, 4, 3, 2, 1])
 find_even_index([1, 100, 50, -51, 1, 1])
 find_even_index([1, 2, 3, 4, 5, 6])
+
+# %%
+# Sort the odd
+# https://www.codewars.com/kata/578aa45ee9fd15ff4600090d/train/python
+
+# You have an array of numbers.
+# Your task is to sort ascending odd numbers but even numbers 
+# must be on their places.
+# Zero isn't an odd number and you don't need to move it. 
+# If you have an empty array, you need to return it.
+
+def sort_array(l):
+    odd = [(i,j) for i,j in enumerate(l) if j % 2]
+    odds = sorted(odd, key=lambda x: x[1])
+    buff = []
+    for i, j in zip(odd, odds):
+        if j[0] not in buff:
+            l[i[0]], l[j[0]] = l[j[0]], l[i[0]]
+            buff.append(i[0])
+    return l
+    
+
+# sort_array([5, 3, 1, 8, 0])
+# sort_array([5, 3, 2, 8, 1, 4])
+sort_array([2, 22, 5, 1, 4, 11, 37, 0])
+sort_array([5, 1, 11, 11, 2, 1, 111, 0])
+
+# %%
+# Write Number in Expanded Form
+# https://www.codewars.com/kata/5842df8ccbd22792a4000245/python
+
+def expanded_form(n):
+    fl = [i for i in str(n)][::-1]
+    return ' + '.join([str(int(j) * int('1'+ '0'*i)) for i,j in enumerate(fl) if int(j) > 0][::-1])
+
+expanded_form(42)
+expanded_form(70304)
+
+# %%
+# Find the unique number
+# https://www.codewars.com/kata/585d7d5adb20cf33cb000235/python
+
+from itertools import groupby
+
+def find_uniq(arr):
+    return [k for k,v in groupby(arr) if len(list(v)) == 1][0]
+
+find_uniq([1, 1, 1, 2, 1, 1])
