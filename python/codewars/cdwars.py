@@ -14,3 +14,128 @@ accum("abcd")
 accum("ZpglnRxqenU")
 
 # %%
+# Find the next perfect square!
+# https://www.codewars.com/kata/56269eb78ad2e4ced1000013/python
+
+# You might know some pretty large perfect squares. 
+# But what about the NEXT one?
+# Complete the findNextSquare method that finds the next 
+# integral perfect square after the one passed as a parameter. 
+# Recall that an integral perfect square is an integer n 
+# such that sqrt(n) is also an integer.
+# If the parameter is itself not a perfect square then - 1 
+# should be returned. You may assume the parameter is 
+# positive.
+
+def findNextSquare(n):
+    r = n ** (1/2)
+    if r % 1 != 0:
+        return - 1
+    return (r+1)**2
+
+findNextSquare(114)
+findNextSquare(144)
+
+# %%
+# Array.diff
+# https://www.codewars.com/kata/523f5d21c841566fde000009/python
+
+# Your goal in this kata is to implement a difference 
+# function, which subtracts one list from another and 
+# returns the result.
+# It should remove all values from list a, which are 
+# present in list b.
+
+
+def array_diff(a, b):
+    return [x for x in a if x not in b]
+
+
+array_diff([1, 2, 2, 2, 3], [2])
+array_diff([1, 2, 2], [1])
+
+# %%
+# Does my number look big in this?
+# https://www.codewars.com/kata/5287e858c6b5a9678200083c/python
+
+# Your code must return true or false depending upon whether 
+# the given number is a Narcissistic number in base 10.
+
+def narcissistic(n):
+    return sum([int(i)**len(str(n)) for i in str(n)]) == n
+
+narcissistic(371)
+narcissistic(7)
+
+# %%
+# Replace With Alphabet Position
+# https://www.codewars.com/kata/546f922b54af40e1e90001da/python
+
+# In this kata you are required to, given a string, replace 
+# every letter with its position in the alphabet.
+# If anything in the text isn't a letter, ignore it and don't 
+# return it.
+
+from string import ascii_lowercase
+
+def alphabet_position(t):
+    return ' '.join([str(ascii_lowercase.index(i)+1) for i in t.lower() if i.isalpha()])
+
+
+alphabet_position("The sunset sets at twelve o' clock.")
+
+# %%
+# Which are in?
+# https://www.codewars.com/kata/550554fd08b86f84fe000a58/train/python
+
+# Given two arrays of strings a1 and a2 return a sorted 
+# array r in lexicographical order of the strings of a1 
+# which are substrings of strings of a2.
+
+def in_array(a, b):
+    return sorted(list(set([i for j in b for i in a if i in j])))
+
+in_array(["live", "arp", "strong"], [
+         "lively", "alive", "harp", "sharp", "armstrong"])
+
+# %%
+# Delete occurrences of an element if it occurs more than n times
+# https://www.codewars.com/kata/554ca54ffa7d91b236000023/train/python
+
+# Given a list lst and a number N, create a new list that 
+# contains each number of lst at most N times without 
+# reordering. For example if N = 2, and the input is 
+# [1, 2, 3, 1, 2, 1, 2, 3], you take[1, 2, 3, 1, 2], drop 
+# the next[1, 2] since this would lead to 1 and 2 being in 
+# the result 3 times, and then take 3, which leads 
+# to[1, 2, 3, 1, 2, 3].
+
+def delete_nth(l, e):
+    r = []
+    for i in l:
+        if r.count(i) < e :
+            r.append(i)
+    return r
+
+
+delete_nth([20, 37, 20, 21], 1)
+
+# %%
+# Equal Sides Of An Array
+# https://www.codewars.com/kata/5679aa472b8f57fb8c000047/train/python
+
+# You are going to be given an array of integers. Your job 
+# is to take that array and find an index N where the sum 
+# of the integers to the left of N is equal to the sum of 
+# the integers to the right of N. If there is no index that 
+# would make this happen, return -1.
+
+def find_even_index(l):
+    try:
+        return [i for i in range(0, len(l)) if sum(l[:i]) == sum(l[i+1:])][0]
+    except:
+        return -1
+
+find_even_index([1, 2, 3, 4, 3, 2, 1])
+find_even_index([1, 100, 50, -51, 1, 1])
+find_even_index([1, 2, 3, 4, 5, 6])

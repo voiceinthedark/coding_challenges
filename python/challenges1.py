@@ -4,6 +4,7 @@
 # return a sorted list containing only duplicate numbers from 
 # the given nums list.
 
+import time
 def duplicate_nums(l):
     return sorted(list(set([x for x in l if l.count(x) > 1]))) or None
 
@@ -286,3 +287,99 @@ def relation_to_luke(name):
 relation_to_luke("Darth Vader")
 
 # %%
+# Curzon Numbers
+# https://edabit.com/challenge/HYjQKDXFfeppcWmLX
+
+# In this challenge, establish if a given integer num is a 
+# Curzon number. If 1 plus 2 elevated to num is exactly 
+# divisible by 1 plus 2 multiplied by num, then num is a 
+# Curzon number.
+# Given a non-negative integer num, implement a function 
+# that returns True if num is a Curzon number, 
+# or False otherwise.
+
+def is_curzon(num):
+    return (2**num + 1) % (2*num + 1) == 0
+
+is_curzon(5)
+is_curzon(10)
+
+# %%
+# nPr and nCr
+# https://edabit.com/challenge/DottLgHxGke8fW8uK
+
+# Write a function that efficiently calculates nPr 
+# (number of permutations of r items from a set of size n) 
+# and another function that efficiently calculates nCr 
+# (number of combinations of r items from a set of size n, 
+# regardless of order).
+
+# The formula for calculating nPr is n!/ (n-r)! 
+# ("!" is the factorial operation).
+# The formula for calculating nCr is n!/ (r!(n-r)!).
+# Your functions should work efficiently for cases where n! 
+# or r! are very large compared to the result. 
+# Simply calculating the factorials and dividing will cause 
+# your program to time out. See if you can think of a 
+# more efficient method.
+
+import time
+tic = time.perf_counter()
+
+def nPr(n, r):
+    s = 1
+    for i in range(n-r+1, n+1):
+        s *= i
+    return s
+
+
+def nCr(n, r):
+    if r > n - r:
+        r = n - r
+    s = 1
+    for i in range(1, r+1):
+        s *= n - r + i
+        s //= i
+    return s
+
+# nPr(7, 4)
+# nPr(300, 3)
+# nCr(7, 4)
+# nCr(300, 3)
+# nCr(300, 3)
+
+
+testsP = [
+    ((7, 4), 840),
+    ((8, 5), 6720),
+    ((4, 3), 24),
+    ((7, 7), 5040),
+    ((7, 1), 7),
+    ((300, 3), 26730600),
+    ((1000000, 2), 999999000000),
+    ((1000000000, 1), 1000000000),
+]
+
+testsC = [
+    ((7, 4), 35),
+    ((8, 5), 56),
+    ((4, 3), 4),
+    ((7, 7), 1),
+    ((7, 1), 7),
+    ((300, 3), 4455100),
+    ((300, 297), 4455100),
+    ((1000000, 2), 499999500000),
+    ((1000000, 999998), 499999500000),
+    ((1000000000, 1), 1000000000),
+    ((1000000000, 1000000000), 1),
+]
+print('Testing Permuations')
+for test in testsP:
+    # print("Input: " + str(test[0]))
+    print(nPr(*test[0]) == test[1])
+print('Testing Combinations')
+for test in testsC:
+    # print("Input: " + str(test[0]))
+    print(nCr(*test[0]) == test[1])
+
+print('t = {:.9f} sec'.format(time.perf_counter() - tic))
